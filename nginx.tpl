@@ -8,8 +8,10 @@ events {
 }
 
 http {
-
-    access_log off;
+    log_format main '$time_iso8601 $request_time $status "$request_method $scheme://$host$request_uri" "$http_user_agent" $remote_addr $http_x_forwarded_for';
+    access_log /dev/stdout main;
+    error_log /dev/stdout notice;
+    
     sendfile        on;
     keepalive_timeout  30;
     gzip  on;
